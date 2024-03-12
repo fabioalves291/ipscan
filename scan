@@ -15,6 +15,7 @@ do
 			#echo $IP :: Destination Host Unreachable
 		else 
 			echo $IP :: Caption
+			echo $IP >> ipsrede
 			COUNT_IP=$(($COUNT_IP+1))
 	fi
 done
