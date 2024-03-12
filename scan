@@ -1,0 +1,21 @@
+#!/bin/bash
+
+REDE=192.168.0.
+COUNT_IP=0
+for COUNT in $(seq 0 255)
+do
+	IP=$REDE$COUNT
+	RETORNO=$(ping -c 2 "$IP")
+	echo $RETORNO > retorno
+
+	UNREACHABLE_IP=$(grep "Destination Host Unreachable" -c retorno) 
+	if [ $UNREACHABLE_IP -gt 0 ];
+		then
+			IP_UNREACHABLE=$IP
+			#echo $IP :: Destination Host Unreachable
+		else 
+			echo $IP :: Caption
+			COUNT_IP=$(($COUNT_IP+1))
+	fi
+done
+echo $COUNT_IP Connetions
